@@ -10,10 +10,9 @@
         {{ precision }}
     )
 {% endmacro %}
-
 with
-    sales as (select * from {{ ref('stg_product') }}),
-    product as (select * from {{ ref('stg_sales') }})
+    sales as (select * from {{ ref('stg_sales') }}),
+    product as (select * from {{ ref('stg_product') }})
 
 select
     s.date_date,
@@ -27,9 +26,9 @@ select
     -- Cost --
     cast(p.purchse_price as float64) as purchase_price,
     round(s.quantity * cast(p.purchse_price as float64), 2) as purchase_cost,
-    -- Margin using macro --
+    -- Margin with  macro --
     s.revenue - (s.quantity * cast(p.purchse_price as float64)) as margin,
-    -- Margin Percent using macro --
+    -- Margin Percent with macro --
     round(
         safe_divide(
             (s.revenue - s.quantity * cast(p.purchse_price as float64)), s.revenue
