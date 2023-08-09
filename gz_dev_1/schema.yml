@@ -24,3 +24,4 @@ models:
             tests : 
             - not_null 
           - name: margin
+    - name: stg_sales
