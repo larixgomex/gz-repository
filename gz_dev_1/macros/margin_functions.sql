@@ -4,3 +4,8 @@
         {{ precision }}
     )
 {% endmacro %}
+
+{% macro margin(s, p) %}
+    {{ s }}.revenue
+    - ({{ s }}.quantity * cast({{ p }}.purchse_price as float64))
+{% endmacro %}
