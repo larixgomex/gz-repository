@@ -27,4 +27,4 @@ select
         2
     ) as margin_percent
 from sales s
-inner join product p on s.pdt_id = p.products_id
+inner join product p on s.products_id = p.products_id
