@@ -34,5 +34,5 @@ models:
     # Applies to all files under models/example/
     sales:
       materialized: view
-
-      
+  staging:
+    schema: "staging"
