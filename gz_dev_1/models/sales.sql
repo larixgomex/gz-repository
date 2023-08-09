@@ -12,8 +12,8 @@
 {% endmacro %}
 
 with
-    sales as (select * from `gz_raw_data.raw_gz_sales`),
-    product as (select * from `gz_raw_data.raw_gz_product`)
+    sales as (select * from {{ ref('stg_product') }}),
+    product as (select * from {{ ref('stg_sales') }})
 
 select
     s.date_date,
@@ -28,17 +28,13 @@ select
     cast(p.purchse_price as float64) as purchase_price,
     round(s.quantity * cast(p.purchse_price as float64), 2) as purchase_cost,
     -- Margin using macro --
-    
-    s.revenue
-    - (s.quantity * cast(p.purchse_price as float64))
- as margin,
+    s.revenue - (s.quantity * cast(p.purchse_price as float64)) as margin,
     -- Margin Percent using macro --
-    
     round(
-        safe_divide((s.revenue - s.quantity * CAST(p.purchse_price AS FLOAT64)), s.revenue),
+        safe_divide(
+            (s.revenue - s.quantity * cast(p.purchse_price as float64)), s.revenue
+        ),
         2
-    )
-
-    as margin_percent
+    ) as margin_percent
 from sales s
 inner join product p on s.pdt_id = p.products_id
