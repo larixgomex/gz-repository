@@ -3,8 +3,8 @@
 
 
 with
-    sales AS (SELECT * FROM {{ ref('stg_sales') }} ,
-    product as (select * from `gz_raw_data.raw_gz_product`)
+    sales AS (SELECT * FROM {{ ref('stg_sales') }}) ,
+    product as (select * from {{ ref('stg_product') }})
 
 select
     s.date_date,
