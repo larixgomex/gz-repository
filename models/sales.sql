@@ -1,6 +1,6 @@
 {{ config(schema="transaction") }}
 
-{% macro margin(s, p) %}
+/*{% macro margin(s, p) %}
     {{ s }}.revenue - ({{ s }}.quantity * cast({{ p }}.purchse_price as float64))
 {% endmacro %}
 
@@ -9,7 +9,7 @@
         safe_divide(({{ turnover }} - {{ purchase_cost }}), {{ turnover }}),
         {{ precision }}
     )
-{% endmacro %}
+{% endmacro %} */
 with
     sales as (select * from {{ ref('stg_sales') }}),
     product as (select * from {{ ref('stg_product') }})
