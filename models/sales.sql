@@ -9,7 +9,7 @@ select
     s.date_date,
     -- Key --
     s.orders_id,
-    s.pdt_id as products_id,
+    s.products_id,
     -- Quantity --
     s.quantity as qty,
     -- Revenue --
